@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 240 10% 5%;
+    --foreground: 180 100% 90%;
+
+    --card: 240 8% 8%;
+    --card-foreground: 180 100% 90%;
+
+    --popover: 240 8% 8%;
+    --popover-foreground: 180 100% 90%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 240 10% 5%;
+
+    --secondary: 280 100% 50%;
+    --secondary-foreground: 240 10% 5%;
+
+    --muted: 240 5% 15%;
+    --muted-foreground: 180 20% 60%;
+
+    --accent: 280 100% 50%;
+    --accent-foreground: 240 10% 5%;
+
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 240 10% 5%;
+
+    --border: 240 10% 15%;
+    --input: 240 10% 12%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.5rem;
+
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 280 100% 50%;
+    --neon-pink: 330 100% 50%;
+    --neon-green: 130 100% 50%;
+    
+    --glow-cyan: 0 0 20px hsla(180, 100%, 50%, 0.5);
+    --glow-purple: 0 0 20px hsla(280, 100%, 50%, 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-mono;
+  }
+}
+
+@layer utilities {
+  .glow-cyan {
+    box-shadow: 0 0 20px hsla(180, 100%, 50%, 0.3);
+  }
+  
+  .glow-purple {
+    box-shadow: 0 0 20px hsla(280, 100%, 50%, 0.3);
+  }
+  
+  .glow-text-cyan {
+    text-shadow: 0 0 10px hsla(180, 100%, 50%, 0.5);
+  }
+  
+  .glow-text-purple {
+    text-shadow: 0 0 10px hsla(280, 100%, 50%, 0.5);
+  }
+}
