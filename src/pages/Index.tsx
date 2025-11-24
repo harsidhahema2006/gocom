@@ -21,6 +21,7 @@ const Index = () => {
   const [code, setCode] = useState(defaultCode);
   const [output, setOutput] = useState("");
   const [isRunning, setIsRunning] = useState(false);
+  const [executionSuccess, setExecutionSuccess] = useState<boolean | undefined>(undefined);
 
   const handleRunCode = async () => {
     setIsRunning(true);
@@ -45,9 +46,15 @@ const Index = () => {
       
       if (response.ok) {
         setOutput(data.output || "// No output");
-        toast.success("Code executed successfully!");
+        setExecutionSuccess(data.success !== false);
+        if (data.success !== false) {
+          toast.success("Code executed successfully!");
+        } else {
+          toast.error("Code execution failed");
+        }
       } else {
         setOutput(data.output || `Error: ${data.error || "Failed to execute code"}`);
+        setExecutionSuccess(false);
         toast.error("Code execution failed");
       }
     } catch (error) {
@@ -61,7 +68,13 @@ const Index = () => {
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      <Header onRun={handleRunCode} isRunning={isRunning} />
+      <Header 
+        onRun={handleRunCode} 
+        isRunning={isRunning}
+        code={code}
+        language={language}
+        output={output}
+      />
       
       <ResizablePanelGroup direction="horizontal" className="flex-1">
         <ResizablePanel defaultSize={50} minSize={30}>
@@ -76,7 +89,7 @@ const Index = () => {
             </ResizablePanel>
             <ResizableHandle className="bg-border" />
             <ResizablePanel defaultSize={35} minSize={20}>
-              <OutputConsole output={output} />
+              <OutputConsole output={output} success={executionSuccess} />
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

@@ -1,11 +1,15 @@
-import { Play, Save, Share2 } from "lucide-react";
+import { Play } from "lucide-react";
 import { Button } from "./ui/button";
 import gocomLogo from "@/assets/gocom-logo.png";
-import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
 
 interface HeaderProps {
   onRun: () => void;
   isRunning: boolean;
+  code: string;
+  language: string;
+  output: string;
 }
 
 const Header = ({ onRun, isRunning }: HeaderProps) => {
@@ -21,24 +25,6 @@ const Header = ({ onRun, isRunning }: HeaderProps) => {
       <div className="flex-1" />
       
       <div className="flex items-center gap-2">
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          className="gap-2"
-          onClick={() => toast.info("Save feature coming soon!")}
-        >
-          <Save className="w-4 h-4" />
-          <span className="hidden sm:inline">Save</span>
-        </Button>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          className="gap-2"
-          onClick={() => toast.info("Share feature coming soon!")}
-        >
-          <Share2 className="w-4 h-4" />
-          <span className="hidden sm:inline">Share</span>
-        </Button>
         <Button 
           className="gap-2 bg-gradient-to-r from-primary to-secondary glow-cyan"
           onClick={onRun}
